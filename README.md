@@ -16,6 +16,7 @@ LinkLeads is a Chrome extension made with the intent of solving a simple but com
 
 💾 Local Storage Support
 
+📷 Screenshot : ![Screenshot 2025-07-01 133525](https://github.com/user-attachments/assets/ba48e6d3-2e0d-4e56-863b-55f64fc40756)
 
 
 &nbsp;   URLs are stored using localStorage, so your leads remain available across sessions.
