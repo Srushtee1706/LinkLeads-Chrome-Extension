@@ -1,30 +1,110 @@
 body {
     margin: 0;
     padding: 10px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     min-width: 400px;
     background-color: #111827;
+    color: #f3f4f6;
+    display: flex;
+    flex-direction: column;
 }
 
+/* Navbar styling */
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #1f2937;
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 15px;
+}
+
+.nav-link {
+    color: #9ca3af;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-link:hover {
+    background-color: #374151;
+    color: #f3f4f6;
+}
+
+.nav-link.active {
+    background-color: #10B981;
+    color: white;
+}
+
+/* Content container styling */
+.content-container {
+    flex-grow: 1;
+}
+
+.page-content {
+    display: none;
+    padding: 10px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.page-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Original LinkLeads element styling */
 input {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
-    border: 1px solid whitesmoke;
+    border: 1px solid #4b5563;
+    background-color: #1f2937;
+    color: #e5e7eb;
     margin-bottom: 4px;
+    border-radius: 6px;
+}
+input::placeholder {
+    color: #6b7280;
 }
 
 button {
-    background:  #10B981;
+    background: #10B981;
     color: white;
     padding: 10px 20px;
-    border: 1px solid #065F46;
+    border: none;
+    border-radius: 6px;
     font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: #065F46;
 }
 
 #delete-btn {
-    background: white;
-    color:  #10B981;
+    background: #ef4444;
+    color: white;
+    border: 1px solid #b91c1c;
+}
+
+#delete-btn:hover {
+    background-color: #b91c1c;
 }
 
 ul {
@@ -35,10 +115,22 @@ ul {
 
 li {
     margin-top: 5px;
+    background-color: #1f2937;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #374151;
 }
 
-a {
-    color:  #10B981;
+li a {
+    color: #3b82f6;
+    word-break: break-all;
 }
 
+/* Responsive design for smaller screens (e.g., mobile or popup) */
+@media (max-width: 420px) {
+    .navbar {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
 
