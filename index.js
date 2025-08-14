@@ -1,24 +1,14 @@
-let myLeads = []
+// Existing code
 const inputEl = document.getElementById("input-el")
 const inputBtn = document.getElementById("input-btn")
 const ulEl = document.getElementById("ul-el")
 const deleteBtn = document.getElementById("delete-btn")
-const leadsFromLocalStorage = JSON.parse( localStorage.getItem("myLeads") )
 const tabBtn = document.getElementById("tab-btn")
 
-if (leadsFromLocalStorage) {
-    myLeads = leadsFromLocalStorage
-    render(myLeads)
-}
+const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"))
+let myLeads = leadsFromLocalStorage || []
 
-tabBtn.addEventListener("click", function(){    
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
-        myLeads.push(tabs[0].url)
-        localStorage.setItem("myLeads", JSON.stringify(myLeads) )
-        render(myLeads)
-    })
-})
-
+// Function to render leads
 function render(leads) {
     let listItems = ""
     for (let i = 0; i < leads.length; i++) {
@@ -33,6 +23,20 @@ function render(leads) {
     ulEl.innerHTML = listItems
 }
 
+// Check if leads exist in local storage and render them
+if (myLeads) {
+    render(myLeads)
+}
+
+// Event listeners for buttons
+tabBtn.addEventListener("click", function() {
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        myLeads.push(tabs[0].url)
+        localStorage.setItem("myLeads", JSON.stringify(myLeads))
+        render(myLeads)
+    })
+})
+
 deleteBtn.addEventListener("dblclick", function() {
     localStorage.clear()
     myLeads = []
@@ -42,6 +46,26 @@ deleteBtn.addEventListener("dblclick", function() {
 inputBtn.addEventListener("click", function() {
     myLeads.push(inputEl.value)
     inputEl.value = ""
-    localStorage.setItem("myLeads", JSON.stringify(myLeads) )
+    localStorage.setItem("myLeads", JSON.stringify(myLeads))
     render(myLeads)
 })
+
+
+// New code for navbar functionality
+const navLinks = document.querySelectorAll('.nav-link');
+const pages = document.querySelectorAll('.page-content');
+
+navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Remove active class from all links and pages
+        navLinks.forEach(nav => nav.classList.remove('active'));
+        pages.forEach(page => page.classList.remove('active'));
+        
+        // Add active class to the clicked link and corresponding page
+        const targetPage = e.target.dataset.page;
+        document.getElementById(`${targetPage}-page`).classList.add('active');
+        e.target.classList.add('active');
+    });
+});
